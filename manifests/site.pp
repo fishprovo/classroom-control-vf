@@ -50,5 +50,6 @@ node default {
     onlyif  => "/bin/test `/bin/grep 'Welcome to spidersddd.puppetlabs.vm!' /etc/motd`", 
   }
   include users
+  include skeleton
 }
 
