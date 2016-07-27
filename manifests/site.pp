@@ -41,13 +41,12 @@ ini_setting { 'random ordering':
 node default {
   # This is where you can declare classes for all nodes.
   # Example:
-  #   class { 'my_class': }
+  #   class { 'my_class
   notify { "Hello, my name is ${::fqdn}": }
   
-  file { '/etc/motd':
-    ensure  => file,
-    owner   => 'root',
-    group   => 'root',
-    content => 'Puppet manages resources',
+  exec { 'motd 7.2':
+    path    => '/usr/local/bin',
+    command => "cowsay 'Welcome to ${::fqdn}!' > /etc/motd",
+    onlyif  => "test `grep 'Welcome to ${::fqdn}!'`", 
   }
 }
