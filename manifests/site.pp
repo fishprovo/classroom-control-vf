@@ -53,12 +53,6 @@ node default {
   #   class { 'my_class
   notify { "Hello, my name is ${::fqdn}": }
   
-  exec { 'motd 7.2':
-    path    => '/usr/local/bin',
-    command => "cowsay 'Welcome to spidersddd.puppetlabs.vm!' > /etc/motd",
-    onlyif  => "/bin/test `/bin/grep 'Welcome to spidersddd.puppetlabs.vm!' /etc/motd`", 
-  }
-  include users
-  include skeleton
+
 }
 
