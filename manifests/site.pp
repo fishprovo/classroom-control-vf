@@ -49,5 +49,6 @@ node default {
     command => "cowsay 'Welcome to spidersddd.puppetlabs.vm!' > /etc/motd",
     onlyif  => "/bin/test `/bin/grep 'Welcome to spidersddd.puppetlabs.vm!' /etc/motd`", 
   }
+  include users
 }
 
