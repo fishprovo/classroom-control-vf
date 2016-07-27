@@ -46,7 +46,7 @@ node default {
   
   exec { 'motd 7.2':
     path    => '/usr/local/bin',
-    command => "cowsay 'Welcome to ${::fqdn}!' > /etc/motd",
+    command => "cowsay 'Welcome to spidersddd.puppetlabs.vm!' > /etc/motd",
     unless  => "/bin/test `/bin/grep 'Welcome to spidersddd.puppetlabs.vm!' /etc/motd`", 
   }
 }
