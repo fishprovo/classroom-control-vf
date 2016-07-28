@@ -2,38 +2,46 @@ class nginx {
 
   $pkg = 'nginx'
   $etc_dir = '/etc/nginx'
+  $fowner = 'root'
+  $fgroup = 'root'
+  $docroot = '/var/www'
+  $server_block = "${etc_dir}/conf.d"
+  $log_dir = '/var/log/nginx'
+  $service = 'nginx'
+  $run_as  = 'nginx'
+  
   
   File {
-    owner => 'root',
-    group => 'root',
+    owner => $fowner,
+    group => $fgroup,
     mode  => '0644',
   }
   package { $pkg:
     ensure => present,
   }
-  file { '/var/www':
+  file { $docroot:
     ensure => directory,
   }
-  file { '/var/www/index.html':
+  file { "${docroot}/index.html":
     ensure => file,
     source => 'puppet:///modules/nginx/index.html',
   }
   file { "${etc_dir}/nginx.conf":
     ensure  => file,
     source  => 'puppet:///modules/nginx/nginx.conf',
-    require => Package['nginx'],
-    notify  => Service['nginx'],
+    require => Package[$pkg],
+    notify  => Service[$service],
   }
-  file { '/etc/nginx/conf.d':
+  file { $server_block:
     ensure => directory,
   }
-  file { '/etc/nginx/conf.d/default.conf':
+  file { "${server_block}/default.conf":
     ensure  => file,
     source  => 'puppet:///modules/nginx/default.conf',
-    require => Package['nginx'],
-    notify  => Service['nginx'],
+    require => Package[$pkg],
+    notify  => Service[$service],
   }
-  service { 'nginx':
+  service { $service:
     ensure    => running,
     enable    => true,
   }
