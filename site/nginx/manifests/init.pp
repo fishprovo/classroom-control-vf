@@ -55,11 +55,13 @@ class nginx {
   }
   file { "${docroot}/index.html":
     ensure => file,
-    source => 'puppet:///modules/nginx/index.html',
+    #source => 'puppet:///modules/nginx/index.html',
+    content => template('nginx/index.html.erb'),
   }
   file { "${etc_dir}/nginx.conf":
     ensure  => file,
-    source  => 'puppet:///modules/nginx/nginx.conf',
+    #source  => 'puppet:///modules/nginx/nginx.conf',
+    content => template('nginx/nginx.conf.erb'),
     require => Package[$pkg],
     notify  => Service[$service],
   }
@@ -68,7 +70,8 @@ class nginx {
   }
   file { "${server_block}/default.conf":
     ensure  => file,
-    source  => 'puppet:///modules/nginx/default.conf',
+    #source  => 'puppet:///modules/nginx/default.conf',
+    content => template('nginx/default.conf.erb'),
     require => Package[$pkg],
     notify  => Service[$service],
   }
