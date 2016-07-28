@@ -1,8 +1,10 @@
 <html>
-  <head>
-    <title>Hello, I am a <%= @kernel %> host type!</title>
-  </head>
   <body>
+    <h1>Hello, I am a <%= @kernel %> host type!</h1>
     <h1>Hello World, This is host <%= @hostname %>!</h1>
+    <h2>I have been awake for <%= @uptime_seconds %> </h2>
+    <% if @is_virtual -%>
+      <h3>I am a <%= virtual %> type machine. </h3>
+    <% end -%>
   </body>
 </html>
