@@ -38,15 +38,6 @@ ini_setting { 'random ordering':
 # will be included in every node's catalog, *in addition* to any classes
 # specified in the console for that node.
 
-node 'spidersddd.puppetlabs.vm' {
-  include users
-  include skeleton
-  file { '/tmp/example.file':
-    ensure => file,
-    content => 'This is from spidersddd.puppetlabs.vm node classification.\n',
-  }
-}
-
 node default {
   # This is where you can declare classes for all nodes.
   # Example:
