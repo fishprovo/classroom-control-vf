@@ -1,10 +1,14 @@
 class nginx {
+
+  $pkg = 'nginx'
+  $etc_dir = '/etc/nginx'
+  
   File {
     owner => 'root',
     group => 'root',
     mode  => '0644',
   }
-  package { 'nginx':
+  package { $pkg:
     ensure => present,
   }
   file { '/var/www':
@@ -14,7 +18,7 @@ class nginx {
     ensure => file,
     source => 'puppet:///modules/nginx/index.html',
   }
-  file { '/etc/nginx/nginx.conf':
+  file { "${etc_dir}/nginx.conf":
     ensure  => file,
     source  => 'puppet:///modules/nginx/nginx.conf',
     require => Package['nginx'],
