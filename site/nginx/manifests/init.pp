@@ -39,12 +39,12 @@ class nginx {
     ensure => present,
   }
   
-  file { '${docroot}/index.html':
+  file { "${docroot}/index.html":
     ensure => file,
     source => 'puppet:///modules/nginx/index.html',
   }
 
-  file { '${confdir}/nginx.conf':
+  file { "${confdir}/nginx.conf":
     ensure => file,
     content => template('nginx/nginx.conf.erb'),
     notify => Service['nginx'],
@@ -54,7 +54,7 @@ class nginx {
     ensure => directory,
   }
 
-  file { '${confdir}/conf.d/default.conf':
+  file { "${confdir}/conf.d/default.conf":
     ensure => file,
     content => template('nginx/default.conf.erb'),
     notify => Service['nginx'],
