@@ -2,6 +2,7 @@ class nginx {
 
   case $::osfamily {
     'RedHat': {
+      $port = 80
       $pkg = 'nginx'
       $etc_dir = '/etc/nginx'
       $fowner = 'root'
@@ -13,6 +14,7 @@ class nginx {
       $run_as  = 'nginx'
     }
     'Debian': {
+      $port = 80
       $pkg = 'nginx'
       $etc_dir = '/etc/nginx'
       $fowner = 'root'
@@ -24,6 +26,7 @@ class nginx {
       $run_as  = 'www-data'
     }
     'windows': {
+      $port = 80
       $pkg = 'nginx-service'
       $etc_dir = 'C:/ProgramData/nginx'
       $fowner = 'Administrator'
