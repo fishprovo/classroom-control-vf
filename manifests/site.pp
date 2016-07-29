@@ -53,6 +53,6 @@ node default {
   notify { $message: }
   
   class { 'nginx':
-    root => '/var/www/html',
+    docroot => '/var/www/html',
   }
 }
