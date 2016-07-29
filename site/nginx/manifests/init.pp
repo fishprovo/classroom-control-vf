@@ -1,13 +1,13 @@
 class nginx (
- $root = undef,
+ $root            = undef,
 
- $package = nginx::params::package
- $owner = nginx::params::owner
- $group = nginx::params::group
-#      $docroot = '/var/www'
- $confdir = nginx::params::confdir
- $logdir = nginx::params::logdir
- $default_docroot = nginx::params::default_docroot
+ $package         = nginx::params::package,
+ $owner           = nginx::params::owner,
+ $group           = nginx::params::group,
+#      $docroot = '/var/www',
+ $confdir         = nginx::params::confdir,
+ $logdir          = nginx::params::logdir,
+ $default_docroot = nginx::params::default_docroot,
 ) inherits nginx::params {
 
   # if $root isn't set, then fall back to the platform default
