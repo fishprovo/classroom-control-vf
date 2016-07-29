@@ -45,6 +45,8 @@ node default {
   notify { "Hello, my name is ${::fqdn}": }
   #$virt_cap = capitalize($::virtual)
   #notify { "This host is a virtual ${virt_cap} host.\n": }
-
+  
+  $message = hiera('message')
+  notify { $message: }
 }
 
