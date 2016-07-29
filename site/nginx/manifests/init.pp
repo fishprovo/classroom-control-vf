@@ -1,22 +1,14 @@
 class nginx (
- $root            = undef,
-
  $package         = nginx::params::package,
  $owner           = nginx::params::owner,
  $group           = nginx::params::group,
-#      $docroot = '/var/www',
+ $docroot         = nginx::params::docroot,
  $confdir         = nginx::params::confdir,
  $logdir          = nginx::params::logdir,
  $default_docroot = nginx::params::default_docroot,
 ) inherits nginx::params {
 
-  # if $root isn't set, then fall back to the platform default
-  $docroot = $root ? {
-    undef => $default_docroot,
-    default => $root,
-  }
-
-  File {
+   File {
     owner => $owner,
     group => $group,
     mode => '0644',
