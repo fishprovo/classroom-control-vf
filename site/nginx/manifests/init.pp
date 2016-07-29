@@ -1,37 +1,15 @@
 class nginx (
  $root = undef,
- ){
 
-  case $::osfamily {
-    'redhat','debian' : {
-      $package = 'nginx'
-      $owner = 'root'
-      $group = 'root'
+ $package = nginx::params::package
+ $owner = nginx::params::owner
+ $group = nginx::params::group
 #      $docroot = '/var/www'
-      $confdir = '/etc/nginx'
-      $logdir = '/var/log/nginx'
-      $default_docroot = '/var/www'
-    }
-    'windows' : {
-      $package = 'nginx-service'
-      $owner = 'Administrator'
-      $group = 'Administrators'
-#      $docroot = 'C:/ProgramData/nginx/html'
-      $confdir = 'C:/ProgramData/nginx'
-      $logdir = 'C:/ProgramData/nginx/logs'
-      $default_docroot = '/var/www'      
-    }
-    default : {
-      fail("Module ${module_name} is not supported on ${::osfamily}")
-    }
-  }
+ $confdir = nginx::params::confdir
+ $logdir = nginx::params::logdir
+ $default_docroot = nginx::params::default_docroot
+) inherits nginx::params {
 
-  # user the service will run as. Used in the nginx.conf.erb template
-  $user = $::osfamily ? {
-    'redhat' => 'nginx',
-    'debian' => 'www-data',
-    'windows' => 'nobody',
-  }
   # if $root isn't set, then fall back to the platform default
   $docroot = $root ? {
     undef => $default_docroot,
